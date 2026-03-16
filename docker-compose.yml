@@ -1,11 +1,11 @@
 services:
   memory-api:
-    build: .
+    image: ghcr.io/gexianmeng/selfmem:latest
     ports:
-      - "127.0.0.1:8765:8765"   # 只绑定本机，不暴露公网
+      - "127.0.0.1:8765:8765"
     environment:
       - QDRANT_URL=http://qdrant:6333
-      - API_KEY=changeme          # ⚠️ 部署前务必修改
+      - API_KEY=changeme
     depends_on:
       - qdrant
     restart: unless-stopped
@@ -15,7 +15,6 @@ services:
     volumes:
       - qdrant_data:/qdrant/storage
     restart: unless-stopped
-    # 不映射端口，只允许内网访问
 
 volumes:
   qdrant_data:
